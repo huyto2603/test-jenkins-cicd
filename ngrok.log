@@ -83,3 +83,6 @@ t=2022-12-18T23:49:24-0800 lvl=info msg="join connections" obj=join id=f1c16c2ef
 t=2022-12-18T23:49:24-0800 lvl=info msg="join connections" obj=join id=8c786496246a l=[::1]:8080 r=[2001:ee0:4fc6:d5c0:f007:8b34:a626:273d]:54221
 t=2022-12-18T23:49:24-0800 lvl=info msg="join connections" obj=join id=dd7772c04ce9 l=[::1]:8080 r=[2001:ee0:4fc6:d5c0:f007:8b34:a626:273d]:54221
 t=2022-12-18T23:49:24-0800 lvl=info msg="join connections" obj=join id=941db18ed4e6 l=[::1]:8080 r=[2001:ee0:4fc6:d5c0:f007:8b34:a626:273d]:54221
+t=2022-12-18T23:52:21-0800 lvl=info msg="join connections" obj=join id=93c8961cd40e l=[::1]:8080 r=140.82.115.250:44515
+t=2022-12-18T23:53:12-0800 lvl=info msg="join connections" obj=join id=fa7158a04d7b l=[::1]:8080 r=140.82.115.145:40779
+t=2022-12-18T23:53:20-0800 lvl=info msg="join connections" obj=join id=6287367071e2 l=[::1]:8080 r=140.82.115.117:25527
