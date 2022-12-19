@@ -1,8 +1,8 @@
-pipeline{
+pipeline {
     agent any
     stages {
-        stages('clone'){
-            steps{
+        stages('Clone'){
+            steps {
                 git 'https://github.com/huyto2603/test-jenkins.git'
             }
         }
