@@ -4,7 +4,7 @@ url="https://thctechgroup.webhook.office.com/webhookb2/bb16601c-e361-4dd2-a765-d
 myTeamsMessage = pymsteams.connectorcard(url)
 
 # Add text to the message.
-myTeamsMessage.text("this is my text")
+myTeamsMessage.text("hello")
 
 # send the message.
 myTeamsMessage.send()
