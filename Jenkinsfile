@@ -1,9 +1,38 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.8-slim-buster'
+            args '-u 0:0 -v /tmp:/root/.cache'
+        }
+    }
+
     stages {
-        stage('Clone'){
+        stage('Checkout') {
             steps {
-                git 'https://github.com/huyto2603/test-jenkins.git'
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/huyto2603/test-jenkins-cicd.git']]])
+            }
+        }
+        
+        stage('Test SYNTAX') {
+            steps {
+                sh 'python -m compileall'
+                echo "Check syntax complete"
+            }
+        }
+        
+        stage('Test Unit'){
+            steps {
+                sh 'pip3 install --upgrade pip'
+                sh 'pip3 install black'
+                sh 'pip3 install pytest'
+                sh 'pip3 install httpx'
+                sh 'pytest test.py'
+                echo "Check unit complete"
+            }
+        }
+        stage('Complete') {
+            steps {
+                echo "test success"
             }
         }
     }
