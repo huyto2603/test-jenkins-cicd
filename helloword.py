@@ -11,6 +11,7 @@ fake_db = {
 }
 
 app = FastAPI()
+print("13321")
 
 
 class Item(BaseModel):
