@@ -1,10 +1,38 @@
-import pymsteams
-url="https://thctechgroup.webhook.office.com/webhookb2/bb16601c-e361-4dd2-a765-d3e91813f61f@c721557d-32d7-4cbd-9aad-5ba096cd7683/IncomingWebhook/ef99037f9de046f58d328001a8659a8d/183db949-d3e9-4471-85a6-381466ccba6d"
-# You must create the connectorcard object with the Microsoft Webhook URL
-myTeamsMessage = pymsteams.connectorcard(url)
+from typing import Union
 
-# Add text to the message.
-myTeamsMessage.text("hello")
+from fastapi import FastAPI, Header, HTTPException
+from pydantic import BaseModel
 
-# send the message.
-myTeamsMessage.send()
+fake_secret_token = "coneofsilence"
+
+fake_db = {
+    "foo": {"id": "foo", "title": "Foo", "description": "There goes my hero"},
+    "bar": {"id": "bar", "title": "Bar", "description": "The bartenders"},
+}
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    id: str
+    title: str
+    description: Union[str, None] = None
+
+
+@app.get("/items/{item_id}", response_model=Item)
+async def read_main(item_id: str, x_token: str = Header()):
+    if x_token != fake_secret_token:
+        raise HTTPException(status_code=400, detail="Invalid X-Token header")
+    if item_id not in fake_db:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return fake_db[item_id]
+
+
+@app.post("/items/", response_model=Item)
+async def create_item(item: Item, x_token: str = Header()):
+    if x_token != fake_secret_token:
+        raise HTTPException(status_code=400, detail="Invalid X-Token header")
+    if item.id in fake_db:
+        raise HTTPException(status_code=400, detail="Item already exists")
+    fake_db[item.id] = item
+    return item
