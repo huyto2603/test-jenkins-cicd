@@ -27,7 +27,7 @@ pipeline {
         stage('Test Coverage'){
             steps {
                 sh "pip install pytest-cov"
-                sh "pytest -v --cov=notify_server test/*"
+                sh "pytest -v --cov=notify_server test/test_notify_server.py"
             }
         }
         stage('Complete') {
