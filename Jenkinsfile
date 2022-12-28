@@ -23,6 +23,13 @@ pipeline {
                 echo "Check unit complete"
             }
         }
+
+        stage('Test Coverage'){
+            steps {
+                sh "pip install pytest-cov"
+                sh "pytest --cov ."
+            }
+        }
         stage('Complete') {
             steps {
                 echo "test success"
