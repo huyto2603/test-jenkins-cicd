@@ -16,6 +16,8 @@ pipeline {
         stage('Test Unit'){
             steps {
                 sh 'pip3 install --upgrade pip'
+                sh 'pip3 install pymsteams'
+                sh 'pip3 install uvicorn'
                 sh 'pip3 install fastapi'
                 sh 'pip3 install pytest'
                 sh 'pip3 install httpx'
