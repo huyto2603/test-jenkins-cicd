@@ -2,7 +2,8 @@ import sys, os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "lib"))
 from msteam import msteamipexpireftg
-
+from connect_to_splunk import connect_to_splunk_ftg
+from utils import get_ip_local
 from typing import Union
 from fastapi import FastAPI, Request, status, Response
 from fastapi.responses import JSONResponse, HTMLResponse
@@ -31,6 +32,35 @@ def splunk_send_to_msteam(item: ItemFTG):
         print(e)
 
     return result
+
+
+@app.get("/blocklist_ip_local")
+def getiplocal():
+    splunk_service = connect_to_splunk_ftg(
+        username="admin", password="Admin@123!", app="fortigate-adaptive-response"
+    )
+
+    html_content = """
+    <html>
+        <head>
+            <title>Block List IP Local</title>
+        </head>
+        <body>
+         <br> 
+        <div>   <div>
+    """
+    iplocallist = get_ip_local(splunk_service)
+    for item in iplocallist:
+        if str(item["ip_addrs"]).find(",") > -1:
+            for i in item["ip_addrs"]:
+                # iplocal+=str(item["ip_addrs"])+"\n"
+                html_content += f"""<div>{i.split(" ")[0]}/32<div>"""
+        else:
+            html_content += f"""<div>{str(item["ip_addrs"]).split(" ")[0]}/32<div>"""
+
+    html_content += """</body>
+            </html>"""
+    return HTMLResponse(content=html_content, status_code=200)
 
 
 if __name__ == "__main__":

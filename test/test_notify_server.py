@@ -7,7 +7,7 @@ from notify_server import app
 class test(unittest.TestCase):
     client = TestClient(app)
 
-    def test(self):
+    def test_send_ftg_expire(self):
         response = self.client.post(
             "/sendmsteams/ftg/expire/",
             json={
@@ -17,4 +17,8 @@ class test(unittest.TestCase):
                 "group": "The Foo Barters",
             },
         )
+        assert response.status_code == 200
+
+    def test_ftg_get_ip_local(self):
+        response = self.client.get("/blocklist_ip_local")
         assert response.status_code == 200
