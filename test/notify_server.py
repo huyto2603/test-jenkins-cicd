@@ -39,7 +39,7 @@ def getiplocal():
     splunk_service = connect_to_splunk_ftg(
         username="admin", password="Admin@123!", app="fortigate-adaptive-response"
     )
-
+    print(splunk_service)
     html_content = """
     <html>
         <head>
