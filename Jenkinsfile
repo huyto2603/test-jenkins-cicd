@@ -21,8 +21,7 @@ pipeline {
                 sh 'pip3 install fastapi'
                 sh 'pip3 install pytest'
                 sh 'pip3 install httpx'
-                sh 'ping 192.168.135.129'
-                sh 'pytest -v test/test_notify_server.py'
+                sh 'python3 test/test_notify_server.py '
                 echo "Check unit complete"
             }
         }

@@ -22,3 +22,7 @@ class test(unittest.TestCase):
     def test_ftg_get_ip_local(self):
         response = self.client.get("/blocklist_ip_local")
         assert response.status_code == 200
+
+
+if __name__ == "__main__":
+    unittest.main()
