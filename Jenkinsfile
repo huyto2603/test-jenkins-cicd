@@ -32,6 +32,7 @@ pipeline {
                 sh "pytest -v --cov=notify_server test/test_notify_server.py"
             }
         }
+        
         stage('Complete') {
             steps {
                 echo "test success"
