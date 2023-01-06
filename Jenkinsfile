@@ -21,6 +21,7 @@ pipeline {
                 sh 'pip3 install fastapi'
                 sh 'pip3 install pytest'
                 sh 'pip3 install httpx'
+                sh 'pip3 install splunk-sdk'
                 sh 'python3 test/test_notify_server.py '
                 echo "Check unit complete"
             }
