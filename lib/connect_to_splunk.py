@@ -7,7 +7,7 @@ def connect_to_splunk_ftg(
     username,
     password,
     app,
-    host="127.0.0.1",
+    host="192.168.135.129",
     port="8089",
     owner="admin",
     sharing="user",
