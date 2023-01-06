@@ -49,19 +49,17 @@ def getiplocal():
          <br> 
         <div>   <div>
     """
-    # print(html_content)
-    # iplocallist = get_ip_local(splunk_service)
-    # print(iplocallist)
-    # for item in iplocallist:
-    #     if str(item["ip_addrs"]).find(",") > -1:
-    #         for i in item["ip_addrs"]:
-    #             # iplocal+=str(item["ip_addrs"])+"\n"
-    #             html_content += f"""<div>{i.split(" ")[0]}/32<div>"""
-    #     else:
-    #         html_content += f"""<div>{str(item["ip_addrs"]).split(" ")[0]}/32<div>"""
+    iplocallist = get_ip_local(splunk_service)
+    for item in iplocallist:
+        if str(item["ip_addrs"]).find(",") > -1:
+            for i in item["ip_addrs"]:
+                # iplocal+=str(item["ip_addrs"])+"\n"
+                html_content += f"""<div>{i.split(" ")[0]}/32<div>"""
+        else:
+            html_content += f"""<div>{str(item["ip_addrs"]).split(" ")[0]}/32<div>"""
 
-    # html_content += """</body>
-    #         </html>"""
+    html_content += """</body>
+            </html>"""
     return HTMLResponse(content=html_content, status_code=200)
 
 
