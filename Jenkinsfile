@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'python:3.6.8-slim-buster'
+            image 'python:3.7.11'
             args '-u 0:0 -v /tmp:/root/.cache'
         }
     }
